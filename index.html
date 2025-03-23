@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>saveООПТ</title>
+    
+    <!-- Шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Фавикон -->
+    <link rel="icon" type="image/png" href="https://pixeldrain.com/api/file/HXwb7ZR8">
+
+    <style>
+        /* Глобальные переменные */
+        :root {
+            --primary-color: #2B8A3E;
+            --secondary-color: #D8F5A2;
+            --dark-text: #2C3E50;
+            --light-text: #F8F9FA;
+            --section-padding: 4rem 0;
+            --container-width: 1200px;
+            --transition: 0.3s ease;
+        }
+
+        /* Базовые стили */
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body { line-height: 1.6; color: var(--dark-text); }
+
+        /* Шапка */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        /* Ссылки навигации */
+        .nav a {
+            text-decoration: none;
+            color: var(--dark-text);
+            transition: color var(--transition);
+        }
+
+        .nav-links a {
+            position: relative;
+            font-weight: 500;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width var(--transition);
+        }
+
+        .nav-links a:hover::after { width: 100%; }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav img { height: 50px; }
+        .nav h1 { color: var(--primary-color); }
+
+        /* Основной контент */
+        .hero {
+            min-height: 90vh;
+            background: linear-gradient(rgba(43, 138, 62, 0.2), rgba(43, 138, 62, 0.1)),
+                      url('https://flomaster.top/o/uploads/posts/2023-10/1697803540_flomaster-top-p-sosnovii-les-panorama-zarisovki-pinterest-57.jpg?quality=lossless') center/cover fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-text);
+            text-align: center;
+            padding: 6rem 2rem 2rem;
+        }
+
+        .hero-content { max-width: 800px; }
+
+        /* Карточки */
+        .products-grid {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: var(--section-padding);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 4rem 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform var(--transition), box-shadow var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Кнопки */
+        .btn {
+            padding: 1rem 2.5rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all var(--transition);
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background: #237A37;
+            transform: translateY(-2px);
+        }
+
+        /* Подвал */
+        .footer {
+            background: var(--dark-text);
+            color: var(--light-text);
+            padding: var(--section-padding);
+        }
+
+        .footer-grid {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            padding: 0 2rem;
+        }
+
+        .footer h4 { color: var(--secondary-color); }
+        .footer a { color: var(--light-text); transition: color var(--transition); }
+        .footer a:hover { color: var(--secondary-color); }
+
+        /* Адаптив */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .products-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Общие стили изображений */
+        img { 
+            width: 100%; 
+            height: auto; 
+            display: block; 
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="header">
+        <nav class="nav">
+            <a href="https://t.me/saveoopt" target="_blank" class="logo-group">
+                <img src="https://pixeldrain.com/api/file/HXwb7ZR8" alt="Лого">
+                <h1>saveООПТ</h1>
+            </a>
+
+            <div class="nav-links">
+                <a target="_blank" href="https://t.me/saveoopt">Мы в ТГ</a>
+                <a>Мы в ВК</a>
+                <a target="_blank" href="https://pravdaosro.ru/wp-content/uploads/2025/01/Postanovlenie-Pravitelstva-Moskvy-ot-27.12.2024-N-3160-PP.pdf">3160-ПП</a>
+                <a target="_blank" href="https://www.mos.ru/authority/documents/doc/54786220/">ЗГМ 27</a>
+                <button class="btn" onclick="location.href='https://t.me/saveoopt'">Присоединиться</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Основной контент -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Власти Москвы запретили лес</h2>
+            <p>27 декабря был снят защитный статус с лесов Москвы, и ныне префектура и мэрия могут приторговывать лесами нашей столицы</p>
+            <button class="btn" onclick="location.href='https://t.me/saveoopt'">Присоединись к борьбе</button>
+        </div>
+    </section>
+
+    <!-- Карточки с информацией -->
+    <section class="products-grid">
+        <!-- Повторяющиеся элементы можно генерировать через JS -->
+        <div class="product-card">
+            <p>😤 Расширяющаяся подсказка 1</p>
+            <h3>Кто лишил статуса?</h3>
+            <p>доп текст</p>
+        </div>
+        <div class="product-card">
+            <p>😀 Расширяющаяся подсказка 2</p>
+            <h3>Кто мы</h3>
+            <p>доп текст</p>
+        </div>
+        <div class="product-card">
+            <p>👐 Наши требования</p>
+            <h3>Что требуем</h3>
+            <p>доп текст</p>
+        </div>
+        <div class="product-card">
+            <p>🤙 Что сделано</p>
+            <h3>Наши действия</h3>
+            <p>доп текст</p>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div>
+                <h4>Наши соцсети</h4>
+                <ul>
+                    <li><a target="_blank" href="https://t.me/saveoopt">Телеграм</a></li>
+                    <li><a>ВКонтакте</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Документы</h4>
+                <ul>
+                    <li><a target="_blank" href="https://www.mos.ru/authority/documents/doc/54786220/">ЗГМ 27</a></li>
+                    <li><a target="_blank" href="https://pravdaosro.ru/wp-content/uploads/2025/01/Postanovlenie-Pravitelstva-Moskvy-ot-27.12.2024-N-3160-PP.pdf">3160-ПП</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Ресурсы</h4>
+                <ul>
+                    <li><a target="_blank" href="https://telegra.ph/Peticiya-01-14">Петиция</a></li>
+                    <li><a target="_blank" href="https://telegra.ph/Polnoe-rukovodstvo-po-sboru-podpisej-02-04">Инструкция</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
